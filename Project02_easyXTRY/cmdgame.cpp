@@ -2,6 +2,7 @@
 #define XSIZE 640
 #define YSIZE 480
 
+/******************************************************/
 #pragma comment( lib, "MSIMG32.LIB")
 //// 透明贴图函数
 //// 参数：
@@ -62,6 +63,100 @@ void transparentimage(IMAGE* dstimg, int x, int y, IMAGE* srcimg, UINT transpare
 		src += src_width;
 	}
 }
+
+/******************************************************/
+// 程序名称：精确到微秒的延时类（基于多媒体定时器）
+// 程序编写：yangw80 <yw80@qq.com>
+// 最后修改：2011-5-4
+//
+#pragma once
+#include <windows.h>
+
+class MyTimer
+{
+private:
+	LARGE_INTEGER m_clk;
+
+	// 保存时钟信息
+	LONGLONG m_oldclk;
+
+
+	// 保存开始时钟和结束时钟
+	int m_freq;
+
+
+
+
+	// 时钟频率(时钟时间换算率)，时间差
+
+public:
+	MyTimer();
+	void Sleep(int ms);
+	void Reset();
+};
+
+// 构造函数
+MyTimer::MyTimer()
+{
+	QueryPerformanceFrequency(&m_clk);
+	m_freq = (int)m_clk.QuadPart / 1000;
+
+	// 获得计数器的时钟频率
+	m_oldclk = 0;
+}
+
+// 延时
+void MyTimer::Sleep(int ms)
+{
+	unsigned int c = ms * m_freq;
+
+	if (m_oldclk == 0)
+	{
+
+		// 开始计时
+
+		QueryPerformanceCounter(&m_clk);
+
+		m_oldclk = m_clk.QuadPart;
+
+
+
+		// 获得开始时钟
+	}
+
+	m_oldclk += c;
+
+	QueryPerformanceCounter(&m_clk);
+
+	if (m_clk.QuadPart > m_oldclk)
+
+		m_oldclk = m_clk.QuadPart;
+	else
+
+		do
+
+		{
+
+
+			::Sleep(1);
+
+
+			QueryPerformanceCounter(&m_clk);
+			// 获得终止时钟
+
+		}
+
+	while (m_clk.QuadPart < m_oldclk);
+}
+
+// 重置延时器
+void MyTimer::Reset()
+{
+	m_oldclk = 0;
+}
+/****************************************************/
+
+
 
 //用于定义游戏正文中用到的元素
 
@@ -177,13 +272,20 @@ void initreimu()
 
 //侦测灵梦动作，并绘制灵梦移动路径，动画
 //之后要适配新的按键映射函数，以及御札，滑铲，灵击
-void moveinspect(IMAGE* pixelreimu,IMAGE*l1,IMAGE*l2,IMAGE*l3,IMAGE*r1,IMAGE*r2,IMAGE*r3)
+static DWORD oldtickmovetime;
+static DWORD newtickmovetime;
+void moveinspect(IMAGE* pixelreimu,IMAGE*l1,IMAGE*l2,IMAGE*l3,IMAGE*r1,IMAGE*r2,IMAGE*r3,int* xk,int* xn)
 {
-	
-	Sleep(5);
+	MyTimer tmove;
+
 	int optmove = GETCMD();
 	int firstdo = 0;//优先占用：部分操作会使该值变为1，跳过之后的所有移动检测
-	
+	int isx = 0;
+
+
+
+	newtickmovetime = GetTickCount();
+
 	//int ismove = 0;//是否按下了移动键，0为无，1为左，2为右
 
 	//判断灵梦的各种操作
@@ -203,12 +305,28 @@ void moveinspect(IMAGE* pixelreimu,IMAGE*l1,IMAGE*l2,IMAGE*l3,IMAGE*r1,IMAGE*r2,
 	//	ismove = 2;//右移
 	//}
 
+#if 0
+	if (optmove == CMD_CANCEL)
+	{
+		if(*xn == 0)
+		{ 
+			isx = 1;
+			*xn = 1;
+		}
+		*xn++;
+		if (*xk % 10 == 0 && *xn > 10)
+		{
+			isx = 1;
+		}
+		else xn = 0;
 
-
-#if 0//暂时没做
+	}
+#endif
+#if 0
+//暂时没做
 	/************滑铲*************/
 	//是否在移动同时按下了x键，从而发生滑铲
-	if ((GETCMD() == CMD_CANCEL) && (optmove == CMD_LEFT))
+	if ((isx == 1))// && (optmove == CMD_LEFT))
 	{
 		firstdo = 1;
 		double speedx = 1.5 * reimu.x;//滑铲中灵梦变速
@@ -246,7 +364,9 @@ void moveinspect(IMAGE* pixelreimu,IMAGE*l1,IMAGE*l2,IMAGE*l3,IMAGE*r1,IMAGE*r2,
 		}
 	}
 
-	if ((GETCMD() == CMD_CANCEL) &&(optmove == CMD_RIGHT))
+#endif
+#if 0
+	if ((isx == 1) &&(optmove == CMD_RIGHT))
 	{
 		firstdo = 1;
 		double speedx = 1.5 * reimu.x;//滑铲中灵梦变速
@@ -326,12 +446,12 @@ void moveinspect(IMAGE* pixelreimu,IMAGE*l1,IMAGE*l2,IMAGE*l3,IMAGE*r1,IMAGE*r2,
 				reimu.x -= 1;
 
 				FlushBatchDraw();
-				Sleep(5);
+				tmove.Sleep(5);
 
 			}
 			cleardevice();
-			transparentimage(NULL, reimu.x, reimu.y, pixelreimu, 0X4afc3f);
-			FlushBatchDraw();
+			oldtickmovetime = GetTickCount();
+
 		}
 	}
 
@@ -368,12 +488,16 @@ void moveinspect(IMAGE* pixelreimu,IMAGE*l1,IMAGE*l2,IMAGE*l3,IMAGE*r1,IMAGE*r2,
 				}
 				reimu.x += 1;
 				FlushBatchDraw();
-				Sleep(5);
+				tmove.Sleep(5);
 			}
 			cleardevice();
-			transparentimage(NULL, reimu.x, reimu.y, pixelreimu, 0X4afc3f);
-			FlushBatchDraw();
+			oldtickmovetime = GetTickCount();
 		}
+	}
+	if (static_cast<long long>(newtickmovetime) - oldtickmovetime >= 40)
+	{
+		transparentimage(NULL, reimu.x, reimu.y, pixelreimu, 0X4afc3f);
+		FlushBatchDraw();
 	}
 
 }
@@ -414,9 +538,23 @@ int gamemain(int* signalp,int endsignal)
 	endbgm;
 	startbgm(m\\(2).MID);
 
+	
+	MyTimer tt;
+	int xk = 0;
+	int xn = 0;
 
 	while(1)
 	{
+
+		//延时
+		tt.Sleep(25);
+		xk++;
+		if (xk == 1000)
+		{
+			xk = 0;
+		}
+
+
 		//判断是否按下esc菜单
 		if (GETCMD() == CMD_ESC)
 		{
@@ -429,7 +567,12 @@ int gamemain(int* signalp,int endsignal)
 
 		//画灵梦移动后的图像
 		//修bug，闪烁和只有一张图
-		moveinspect(&pixelreimu,&reimuleft1,&reimuleft2,&reimuleft3,&reimuright1,&reimuright2,&reimuright3);
+		
+		//控制滑铲频率
+
+
+
+		moveinspect(&pixelreimu,&reimuleft1,&reimuleft2,&reimuleft3,&reimuright1,&reimuright2,&reimuright3,&xk,&xn);
 		
 		//弃置的古代光栅
 		/*putimage(reimu.x, reimu.y, &pixelreimu, SRCAND);

@@ -20,6 +20,8 @@ int GETCMD()
 	if (GetAsyncKeyState(27) & 0x8000)
 		cmd |= CMD_ESC;
 
+
+
 	if ((GetAsyncKeyState('Z') & 0x8000) || ((GetAsyncKeyState('z') & 0x8000)))
 		cmd |= CMD_CONFIRM;
 	if ((GetAsyncKeyState('X') & 0x8000) || ((GetAsyncKeyState('x') & 0x8000)))
@@ -43,14 +45,14 @@ int limitmenujudge(int optnum, int c_opt, int optmove)
 {
 	switch (optmove)
 	{
-	case 88:
+	case CMD_UP:
 		if (c_opt >= 1)
 		{
 			c_opt--;
 			break;
 		}
 		break;
-	case 22:
+	case CMD_DOWN:
 		if (c_opt < optnum - 1)
 		{
 			c_opt++;
