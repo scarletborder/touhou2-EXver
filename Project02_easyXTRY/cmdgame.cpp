@@ -252,7 +252,7 @@ void initreimu()
 	case 1:
 		cscore.heartnum = 3;
 		cscore.bombnum = 3;
-		reimu.speed = 15;
+		reimu.speed = 18;
 		break;
 	case 2:
 		cscore.heartnum = 2;
@@ -304,194 +304,204 @@ void moveinspect(IMAGE* pixelreimu,IMAGE*l1,IMAGE*l2,IMAGE*l3,IMAGE*r1,IMAGE*r2,
 	//{
 	//	ismove = 2;//右移
 	//}
+	if(_kbhit())
+	{
 
 #if 0
-	if (optmove == CMD_CANCEL)
-	{
-		if(*xn == 0)
-		{ 
-			isx = 1;
-			*xn = 1;
-		}
-		*xn++;
-		if (*xk % 10 == 0 && *xn > 10)
+		if (optmove == CMD_CANCEL)
 		{
-			isx = 1;
-		}
-		else xn = 0;
+			if (*xn == 0)
+			{
+				isx = 1;
+				*xn = 1;
+			}
+			*xn++;
+			if (*xk % 10 == 0 && *xn > 10)
+			{
+				isx = 1;
+			}
+			else xn = 0;
 
 	}
 #endif
 #if 0
-//暂时没做
-	/************滑铲*************/
-	//是否在移动同时按下了x键，从而发生滑铲
-	if ((isx == 1))// && (optmove == CMD_LEFT))
-	{
-		firstdo = 1;
-		double speedx = 1.5 * reimu.x;//滑铲中灵梦变速
-		if (reimu.x - speedx <= 1)
+		//暂时没做
+			/************滑铲*************/
+			//是否在移动同时按下了x键，从而发生滑铲
+		if ((isx == 1))// && (optmove == CMD_LEFT))
 		{
-			return;
-		}
-		else
-		{
-			int movetimes = speedx / 2;
-
-			for (int i = 1; i <= movetimes; i++)
+			firstdo = 1;
+			double speedx = 1.5 * reimu.x;//滑铲中灵梦变速
+			if (reimu.x - speedx <= 1)
 			{
-				cleardevice();
-				if (i % 3 == 1)
-				{
-					transparentimage(NULL, reimu.x, reimu.y, l1, 0X4afc3f);
-				}
-				else if(i % 3 == 2)
-				{
-					transparentimage(NULL, reimu.x, reimu.y, l2, 0X4afc3f);
-				}
-				else
-				{
-					transparentimage(NULL, reimu.x, reimu.y, l3, 0X4afc3f);
-				}
-				reimu.x -= 2;
-
-				FlushBatchDraw();
-				Sleep(5);
-
+				return;
 			}
-			cleardevice();
-			transparentimage(NULL, reimu.x, reimu.y, pixelreimu, 0X4afc3f);
+			else
+			{
+				int movetimes = speedx / 2;
+
+				for (int i = 1; i <= movetimes; i++)
+				{
+					cleardevice();
+					if (i % 3 == 1)
+					{
+						transparentimage(NULL, reimu.x, reimu.y, l1, 0X4afc3f);
+					}
+					else if (i % 3 == 2)
+					{
+						transparentimage(NULL, reimu.x, reimu.y, l2, 0X4afc3f);
+					}
+					else
+					{
+						transparentimage(NULL, reimu.x, reimu.y, l3, 0X4afc3f);
+					}
+					reimu.x -= 2;
+
+					FlushBatchDraw();
+					Sleep(5);
+
+				}
+				cleardevice();
+				transparentimage(NULL, reimu.x, reimu.y, pixelreimu, 0X4afc3f);
+			}
 		}
-	}
 
 #endif
 #if 0
-	if ((isx == 1) &&(optmove == CMD_RIGHT))
-	{
-		firstdo = 1;
-		double speedx = 1.5 * reimu.x;//滑铲中灵梦变速
-		if (reimu.x + speedx >= 618)
+		if ((isx == 1) && (optmove == CMD_RIGHT))
 		{
-			return;
-		}
-		else
-		{
-			int movetimes = speedx / 2;
-
-			for (int i = 1; i <= movetimes; i++)
+			firstdo = 1;
+			double speedx = 1.5 * reimu.x;//滑铲中灵梦变速
+			if (reimu.x + speedx >= 618)
 			{
-				cleardevice();
-				if (i % 3 == 1)
-				{
-					transparentimage(NULL, reimu.x, reimu.y, r1, 0X4afc3f);
-				}
-				else if(i % 3 == 2)
-				{
-					transparentimage(NULL, reimu.x, reimu.y, r2, 0X4afc3f);
-				}
-				else
-				{
-					transparentimage(NULL, reimu.x, reimu.y, r3, 0X4afc3f);
-				}
-				reimu.x += 2;
-
-				FlushBatchDraw();
-				Sleep(5);
-
+				return;
 			}
-			cleardevice();
-			transparentimage(NULL, reimu.x, reimu.y, pixelreimu, 0X4afc3f);
-		}
-	}
+			else
+			{
+				int movetimes = speedx / 2;
+
+				for (int i = 1; i <= movetimes; i++)
+				{
+					cleardevice();
+					if (i % 3 == 1)
+					{
+						transparentimage(NULL, reimu.x, reimu.y, r1, 0X4afc3f);
+					}
+					else if (i % 3 == 2)
+					{
+						transparentimage(NULL, reimu.x, reimu.y, r2, 0X4afc3f);
+					}
+					else
+					{
+						transparentimage(NULL, reimu.x, reimu.y, r3, 0X4afc3f);
+					}
+					reimu.x += 2;
+
+					FlushBatchDraw();
+					Sleep(5);
+
+				}
+				cleardevice();
+				transparentimage(NULL, reimu.x, reimu.y, pixelreimu, 0X4afc3f);
+			}
+}
 #endif
 
 
 
 
 
-	/******普通移动********/
+		/******普通移动********/
 
-	if (optmove == CMD_LEFT && firstdo == 0)//普通左移
-	{
-		//首先是否可以移动，免得穿墙
-		//接着进行移动操作，改变一次坐标并穿插着进行移动时的图片动画
-		if (reimu.x - reimu.speed <= 1)
+		if (optmove == CMD_LEFT && firstdo == 0)//普通左移
 		{
-			return;
-		}
-
-		else
-		{
-
-			int movetimes = reimu.speed;
-
-			for (int i = 1; i <= movetimes; i++)
+			//首先是否可以移动，免得穿墙
+			//接着进行移动操作，改变一次坐标并穿插着进行移动时的图片动画
+			if (reimu.x - reimu.speed <= 1)
 			{
-				cleardevice();
-				if (i % 3 == 1)
-				{
-					transparentimage(NULL, reimu.x, reimu.y, l1, 0X4afc3f);
-					FlushBatchDraw();
-				}
-				else if (i % 3 == 2)
-				{
-					transparentimage(NULL, reimu.x, reimu.y, l2, 0X4afc3f);
-					FlushBatchDraw();
-				}
-				else
-				{
-					transparentimage(NULL, reimu.x, reimu.y, l3, 0X4afc3f);
-					FlushBatchDraw();
-				}
-				reimu.x -= 1;
-
+				transparentimage(NULL, reimu.x, reimu.y, pixelreimu, 0X4afc3f);
 				FlushBatchDraw();
-				tmove.Sleep(5);
+				return;
+			}
+
+			else
+			{
+
+				int movetimes = reimu.speed;
+
+				for (int i = 1; i <= movetimes; i++)
+				{
+					cleardevice();
+					if (i < (movetimes / 3))
+					{
+						transparentimage(NULL, reimu.x, reimu.y, l1, 0X4afc3f);
+						FlushBatchDraw();
+					}
+					else if (i > ((movetimes / 3)) * 2)
+					{
+						transparentimage(NULL, reimu.x, reimu.y, l2, 0X4afc3f);
+						FlushBatchDraw();
+					}
+					else
+					{
+						transparentimage(NULL, reimu.x, reimu.y, l3, 0X4afc3f);
+						FlushBatchDraw();
+					}
+					reimu.x -= 1;
+
+					FlushBatchDraw();
+					tmove.Sleep(5);
+					
+				}
+				cleardevice();
+				oldtickmovetime = GetTickCount();
 
 			}
-			cleardevice();
-			oldtickmovetime = GetTickCount();
-
-		}
-	}
-
-	if (optmove == CMD_RIGHT && firstdo == 0)//普通右移
-	{
-		if (reimu.x + reimu.speed >= 618)
-		{
-			return;
+			
 		}
 
-		
-
-		else
+		if (optmove == CMD_RIGHT && firstdo == 0)//普通右移
 		{
-			int movetimes = reimu.speed ;
-
-			for (int i = 1; i <= movetimes; i++)
+			if (reimu.x + reimu.speed >= 618)
 			{
-				cleardevice();
-				if (i % 3 == 1)
-				{
-					transparentimage(NULL, reimu.x, reimu.y, r1, 0X4afc3f);
-					FlushBatchDraw();
-				}
-				else if (i % 3 == 2)
-				{
-					transparentimage(NULL, reimu.x, reimu.y, r2, 0X4afc3f);
-					FlushBatchDraw();
-				}
-				else
-				{
-					transparentimage(NULL, reimu.x, reimu.y, r3, 0X4afc3f);
-					FlushBatchDraw();
-				}
-				reimu.x += 1;
+				transparentimage(NULL, reimu.x, reimu.y, pixelreimu, 0X4afc3f);
 				FlushBatchDraw();
-				tmove.Sleep(5);
+				return;
 			}
-			cleardevice();
-			oldtickmovetime = GetTickCount();
+
+
+
+			else
+			{
+				int movetimes = reimu.speed;
+
+				for (int i = 1; i <= movetimes; i++)
+				{
+					cleardevice();
+					if (i < (movetimes / 3))
+					{
+						transparentimage(NULL, reimu.x, reimu.y, r1, 0X4afc3f);
+						FlushBatchDraw();
+					}
+					else if (i > ((movetimes / 3)) * 2)
+					{
+						transparentimage(NULL, reimu.x, reimu.y, r2, 0X4afc3f);
+						FlushBatchDraw();
+					}
+					else
+					{
+						transparentimage(NULL, reimu.x, reimu.y, r3, 0X4afc3f);
+						FlushBatchDraw();
+					}
+					reimu.x += 1;
+					FlushBatchDraw();
+					tmove.Sleep(5);
+					
+				}
+				cleardevice();
+				oldtickmovetime = GetTickCount();
+			}
+			
 		}
 	}
 	if (static_cast<long long>(newtickmovetime) - oldtickmovetime >= 40)
