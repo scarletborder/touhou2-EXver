@@ -5,13 +5,13 @@ void drawselectflame_reimu()
 
 
 	settextcolor(WHITE);
-	settextstyle(42, 0, _T("Consolas"));
+	settextstyle(80, 0, _T("Consolas"));
 	outtextxy(200,40,_T("请选择你的机型"));
 
 	settextcolor(WHITE);
-	settextstyle(22, 0, _T("Consolas"));
-	RECT songr = { 40, 200, 639, 479 };
-	drawtext(_T("平衡型:移动速度快\n高攻击型:B可对BOSS造成双倍伤害\n高防御型:抱B撞后重生获得额外B"), &songr, DT_LEFT);
+	settextstyle(44, 0, _T("Consolas"));
+	RECT songr = { 40, 200, SIZEX, SIZEY };
+	drawtext(_T("  平衡型:资源平均  \n  高攻击型:Bomb伤害更高  \n  高防御型:残机多，抱B撞重生获得额外B  "), &songr, DT_LEFT);
 
 	Sleep(40);
 
@@ -24,6 +24,7 @@ int cmdselect_reimu()
 	drawselectflame_reimu();
 
 	Sleep(100);
+	short int cheatdebug = 0;
 	while (1)
 	{
 		//获得光标指令
@@ -44,7 +45,35 @@ int cmdselect_reimu()
 		{
 			return 3;
 		}
-		if (GETCMD() == CMD_ESC)
+		if (GETCMD() == CMD_SPECIAL)
+		{
+			if (cheatdebug == 2)
+			{
+				cheatdebug = 3;
+			}
+			else if (cheatdebug == 3)
+			{
+				return 4;
+			}
+			Sleep(100);
+		}
+		if (GETCMD() == CMD_LEFT)
+		{
+			if (cheatdebug == 0)
+			{
+				cheatdebug = 1;
+
+			}
+		}
+		if (GETCMD() == CMD_RIGHT)
+		{
+
+			if (cheatdebug == 1)
+			{
+				cheatdebug = 2;
+			}
+		}
+		if (GETCMD() == CMD_ESC || GETCMD() == CMD_CANCEL)
 		{
 			return CMD_ESC;
 		}
@@ -59,14 +88,14 @@ void drawselect_reimu(int topt)
 	int opt = topt;//菜单的返回值
 
 	settextcolor(WHITE);
-	settextstyle(22, 0, _T("Consolas"));
+	settextstyle(44, 0, _T("Consolas"));
 
 	RECT selectr = { 30, 200, 639, 479 };
 	drawtext(_T(" \n \n \n "), &selectr, DT_LEFT);
 
 	//光标
 	int x = 30;
-	int y = 200 + opt * 22;
+	int y = 200 + opt * 44;
 
 	outtextxy(x, y, _T(">"));
 }

@@ -51,6 +51,7 @@
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -70,6 +71,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <TargetName>东方封魔录ex</TargetName>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -118,6 +122,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -127,19 +132,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="cmdgame.cpp" />
+    <ClCompile Include="bosschat.cpp" />
+    <ClCompile Include="bossstagecpp.cpp" />
+    <ClCompile Include="gamecmd.cpp" />
+    <ClCompile Include="escmenu.cpp" />
+    <ClCompile Include="gamestruct.cpp" />
     <ClCompile Include="global.cpp" />
+    <ClCompile Include="initstage.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainmenu.cpp" />
     <ClCompile Include="musicroom.cpp" />
+    <ClCompile Include="reward.cpp" />
     <ClCompile Include="scoreboard.cpp" />
     <ClCompile Include="select_reimutype.cpp" />
+    <ClCompile Include="转载引用.cpp" />
     <ClCompile Include="彩虹案例.cpp" />
     <ClCompile Include="星空案例.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\project\midplay.h" />
+    <ClInclude Include="declarestruct.h" />
     <ClInclude Include="menuh.h" />
+    <ClInclude Include="MyTimer.h" />
+    <ClInclude Include="resource1.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

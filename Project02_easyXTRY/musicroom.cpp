@@ -18,7 +18,7 @@ void cmdmusicroommenu()
 	settextcolor(WHITE);
 	settextstyle(22, 0, _T("Consolas"));
 	RECT songr = { 40, 40, 639, 479 };
-	drawtext(_T("01 東方封魔録　～ 浄土曼荼羅\n02 博麗　～ Eastern Wind\n03 End of Daylight\n04 幻夢界\n05 ひもろぎ、むらさきにもえ\n06 東方封魔録　～ 幽幻乱舞\n07 She's in a temper!!\n08 やみのちから\n09 死を賭して"), &songr, DT_LEFT);
+	drawtext(_T("01 東方封魔録　～ 浄土曼荼羅\n02 博麗　～ Eastern Wind\n03 End of Daylight\n04 幻夢界\n05 ひもろぎ、むらさきにもえ\n06 東方封魔録　～ 幽幻乱舞\n07 She's in a temper!!\n08 やみのちから\n09 死を賭して\n10 恋色マジック\n11 Complete Darkness\n12 遠野の森\n13 昔話わんだーらんど\n14 エキストララブ\n15 戦車むすめのみるゆめ"), &songr, DT_LEFT);
 
 	Sleep(20);
 
@@ -27,7 +27,7 @@ void cmdmusicroommenu()
 	{
 
 		int optmove = GETCMD();
-		opt = limitmenujudge(9, opt, optmove);
+		opt = limitmenujudge(15, opt, optmove);
 
 		//使用esc退出音乐室
 		if (opt == CMD_ESC)
@@ -95,6 +95,36 @@ void cmdmusicroommenu()
 			endbgm;
 			startbgm(m\\(9).MID);
 		}
+		if (opt == 9 && GETCMD() == CMD_CONFIRM)
+		{
+			endbgm;
+			startbgm(m\\(10).MID);
+		}
+		if (opt == 10 && GETCMD() == CMD_CONFIRM)
+		{
+			endbgm;
+			startbgm(m\\(11).MID);
+		}
+		if (opt ==11 && GETCMD() == CMD_CONFIRM)
+		{
+			endbgm;
+			startbgm(m\\(12).MID);
+		}
+		if (opt == 12 && GETCMD() == CMD_CONFIRM)
+		{
+			endbgm;
+			startbgm(m\\(13).MID);
+		}
+		if (opt == 13 && GETCMD() == CMD_CONFIRM)
+		{
+			endbgm;
+			startbgm(m\\(14).MID);
+		}
+		if (opt == 14 && GETCMD() == CMD_CONFIRM)
+		{
+			endbgm;
+			startbgm(m\\(15).MID);
+		}
 
 		//绘制光标
 		drawmusicroommenu(opt);
@@ -114,7 +144,7 @@ void drawmusicroommenu(int topt)
 	settextstyle(22, 0, _T("Consolas"));
 
 	RECT selectr = { 10, 40, 639, 479 };
-	drawtext(_T(" \n \n \n \n \n \n \n \n \n"), &selectr, DT_LEFT);
+	drawtext(_T(" \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n"), &selectr, DT_LEFT);
 
 	//光标
 	int x = 10;

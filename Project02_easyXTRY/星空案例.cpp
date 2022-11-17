@@ -2,6 +2,7 @@
 #include <time.h>
 #include <conio.h>
 
+
 #define MAXSTAR 200	// 星星总数
 #if 1
 struct STAR
@@ -18,7 +19,7 @@ STAR star[MAXSTAR];
 void InitStar(int i)
 {
 	star[i].x = 0;
-	star[i].y = rand() % 480;
+	star[i].y = rand() % 720;
 	star[i].step = (rand() % 5000) / 1000.0 + 1;
 	star[i].color = (int)(star[i].step * 255 / 6.0 + 0.5);	// 速度越快，颜色越亮
 	star[i].color = RGB(star[i].color, star[i].color, star[i].color);
@@ -32,7 +33,7 @@ void MoveStar(int i)
 
 	// 计算新位置
 	star[i].x += star[i].step;
-	if (star[i].x > 640)	InitStar(i);
+	if (star[i].x > 960)	InitStar(i);
 
 	// 画新星星
 	putpixel((int)star[i].x, star[i].y, star[i].color);
@@ -48,17 +49,17 @@ void starbk()
 	for (int i = 0; i < MAXSTAR; i++)
 	{
 		InitStar(i);
-		star[i].x = rand() % 640;
+		star[i].x = rand() % 960;
 	}
 
 	// 绘制星空，按任意键退出
 	while (!_kbhit())
 	{
-		settextstyle(22, 0, _T("Consolas"));
+		settextstyle(50, 0, _T("Consolas"));
 		//标题
 		settextcolor(RED);
-		outtextxy(245, 180, _T("星尘幻想研究所"));
-		outtextxy(255, 210, _T("Project 01"));
+		outtextxy(320, 180, _T("星尘幻想研究所"));
+		outtextxy(360, 300, _T("Project 01"));
 		for (int i = 0; i < MAXSTAR; i++)
 			MoveStar(i);
 		Sleep(20);

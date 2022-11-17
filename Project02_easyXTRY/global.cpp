@@ -41,6 +41,8 @@ int GETCMD()
 
 //有选项个数的菜单，移动光标判断是否合法
 //选项个数类似数组，允许optnum写入真实个数，但第一个选项的opt值为0
+//输入：选项的真实个数；现在的选项序号（0，1，2）；选项的move(接受optmove)
+//输出：后来的选项序号（0,1,2）
 int limitmenujudge(int optnum, int c_opt, int optmove)
 {
 	switch (optmove)

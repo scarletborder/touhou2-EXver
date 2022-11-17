@@ -1,103 +1,111 @@
-#include"menuh.h"
+ï»¿#include"menuh.h"
 
 extern struct player_status reimu;
 
 void drawmainmenufalme()
 {
-	//»­³öÖ÷²Ëµ¥·½¿ò
+	//ç”»å‡ºä¸»èœå•æ–¹æ¡†
 	setlinestyle(PS_DASHDOTDOT | PS_JOIN_MITER, 4);
 	setlinecolor(RED);
-	rectangle(200, 260, 440, 440);//left,top,right,buttom
+	rectangle(20*SIZEX/64, 26*SIZEY/48, 44*SIZEX/64, 44*SIZEY/48);//left,top,right,buttom
 
-	//»­Ö÷²Ëµ¥ÎÄ×Ö
+	//ç”»ä¸»èœå•æ–‡å­—
 	settextcolor(WHITE);
-	settextstyle(40, 0, _T("Consolas"));
-	//±êÌâ
-	outtextxy(220, 50, _T("¶«·½·âÄ§Â¼EX"));
+	settextstyle(60, 0, _T("Consolas"));
+	//æ ‡é¢˜
+	outtextxy(11*SIZEX/32, SIZEY/6, _T("ä¸œæ–¹å°é­”å½•EX"));
 
-	settextstyle(22, 0, _T("Consolas"));
-	//Ñ¡Ïî
-	outtextxy(265, 290, _T("Start Game"));
-	outtextxy(265, 330, _T("Music Room"));
-	outtextxy(280, 370, _T("Result"));
-	outtextxy(290, 410, _T("Quit"));
+	settextstyle(2*SIZEY/48, 0, _T("Consolas"));
+	//é€‰é¡¹
+	outtextxy(265*SIZEX/640, 29*SIZEY/48, _T("Start Game"));
+	outtextxy(265*SIZEX/640, 33*SIZEY/48, _T("Music Room"));
+	outtextxy(28*SIZEX/64, 37*SIZEY/48, _T("Result"));
+	outtextxy(29*SIZEX/64, 41*SIZEY/48, _T("Quit"));
+	outtextxy(SIZEX - 200, SIZEY - 80, _T("V0.00c"));
+	outtextxy(SIZEX - 320, SIZEY - 40, _T("æ˜Ÿå°˜å¹»æƒ³ç ”ç©¶æ‰€Â© 2022"));
 }
 
 int cmdmainmenu(int* signalp)
 {
+	endbgm;
+	setbkcolor(BLACK);
+	cleardevice();
+	EndBatchDraw();
 	int opt = 0;//0 1 2
 	startbgm(m\\(1).mid);
 	drawmainmenufalme();
 	
 	while(1)
 	{
-		//»ñµÃ¹â±êÖ¸Áî
+		//èŽ·å¾—å…‰æ ‡æŒ‡ä»¤
 		int optmove = GETCMD();
 		
 		opt = limitmenujudge(4,opt,optmove);
 		
-		//Ê¹ÓÃescÍË³öÓÎÏ·
+		//ä½¿ç”¨escé€€å‡ºæ¸¸æˆ
 		if (opt == CMD_ESC)
 		{
 			return CMD_ESC;
 		}
 		
-		//Ê¹ÓÃÑ¡ÖÐquit+zÍË³öÓÎÏ·
+		//ä½¿ç”¨é€‰ä¸­quit+zé€€å‡ºæ¸¸æˆ
 		if (opt == 3 && GETCMD()==CMD_CONFIRM)
 		{
 			return CMD_ESC;
 		}
 
-		//½øÈëmusicroom
+		//è¿›å…¥musicroom
 		if (opt == 1 && GETCMD() == CMD_CONFIRM)
 		{
 			cmdmusicroommenu();
+			Sleep(150);
 		}
 
-		//½øÈëresult
+		//è¿›å…¥result
 		if (opt == 2 && GETCMD() == CMD_CONFIRM)
 		{
 			seeresult();
+			Sleep(150);
 		}
 
-		//½øÈëÑ¡ÈË½çÃæ
+		//è¿›å…¥é€‰äººç•Œé¢
 		if (opt == 0 && GETCMD() == CMD_CONFIRM)
 		{
 			cleardevice();
 			int judgestartgame = cmdselect_reimu();
 
-			//ÔÚÑ¡Ôñ½ÇÉ«Ò³ÃæÍË³ö£¬·µ»ØÖ÷½çÃæ
+			//åœ¨é€‰æ‹©è§’è‰²é¡µé¢é€€å‡ºï¼Œè¿”å›žä¸»ç•Œé¢
 			if (judgestartgame == CMD_ESC)
 			{
-				Sleep(100);
+				Sleep(300);
 				cleardevice();
 				drawmainmenufalme();
 				continue;
 			}
 
-			return 3;//ÒÑ¾­Ñ¡Ôñ½ÇÉ«£¬¿ªÊ¼ÓÎÏ·
+			return judgestartgame;//å·²ç»é€‰æ‹©è§’è‰²ï¼Œå¼€å§‹æ¸¸æˆ
 		}
 
 		drawmainmenu(opt);
-		Sleep(80);
+		Sleep(100);
 	}
 
 }
 
 
-//²Ëµ¥·½¿ò
+//èœå•æ–¹æ¡†
 void drawmainmenu(int topt)
 {
-	int opt = topt;//²Ëµ¥µÄ·µ»ØÖµ
+	int opt = topt;//èœå•çš„è¿”å›žå€¼
 
 
 
-	//¹â±ê
-	int x = 235;
-	int y = 290 + opt * 40;
-	outtextxy(235, 290, _T(" "));
-	outtextxy(235, 330, _T(" "));
-	outtextxy(235, 370, _T(" "));
-	outtextxy(235, 410, _T(" "));
+	//å…‰æ ‡
+	int x = 235*SIZEX/640;
+	int y = 29*SIZEY/48 + opt * 40*SIZEY / 480;
+	outtextxy(235*SIZEX/640, 29*SIZEY/48, _T(" "));
+	outtextxy(235 * SIZEX / 640, 33 * SIZEY / 48, _T(" "));
+	outtextxy(235 * SIZEX / 640, 37 * SIZEY / 48, _T(" "));
+	outtextxy(235 * SIZEX / 640, 41 * SIZEY / 48, _T(" "));
 	outtextxy(x, y, _T(">"));
 }

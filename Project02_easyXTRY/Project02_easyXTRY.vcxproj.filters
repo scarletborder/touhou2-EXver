@@ -39,7 +39,28 @@
     <ClCompile Include="select_reimutype.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="cmdgame.cpp">
+    <ClCompile Include="gamecmd.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="escmenu.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="转载引用.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="initstage.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="gamestruct.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="reward.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="bossstagecpp.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="bosschat.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,5 +71,17 @@
     <ClInclude Include="..\..\..\project\midplay.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="declarestruct.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="resource1.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MyTimer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

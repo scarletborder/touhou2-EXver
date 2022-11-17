@@ -3,7 +3,7 @@
 
 int main()
 {
-	initgraph(640, 480);
+	initgraph(960, 720);
 	
 	//游戏结束信号
 	//0为没有进行游戏或未正常完成
@@ -17,17 +17,23 @@ int main()
 	starbk();
 	cleardevice();
 	_getch();
+	int escgame = 0;
 
 	//主菜单
-	endsignal = cmdmainmenu(signalp);
-
-	//如果没有按esc，则开始游戏
-	if (endsignal != CMD_ESC)
+	while(endsignal != CMD_ESC)
 	{
-		//开始游戏
-		gamemain(signalp,endsignal);
-		closegraph();
-		return 0;
+		endsignal = cmdmainmenu(signalp);
+		Sleep(50);
+		//如果没有按esc，则开始游戏
+		if (endsignal == CMD_ESC)
+		{
+			break;
+		}
+			//开始游戏
+		Sleep(50);
+			gamemain(signalp, endsignal);
+			
+		
 	}
 	
 
