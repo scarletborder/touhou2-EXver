@@ -1,8 +1,10 @@
 #include"menuh.h"
-#include<graphics.h>
-#include<string.h>
-#include<tchar.h>
-#include<mciapi.h>
+/******************************************************************************************/
+//功能：展示音乐室
+//作者:scarletborder
+/******************************************************************************************/
+
+
 void cmdmusicroommenu()
 {
 	cleardevice();

@@ -1,27 +1,9 @@
 #pragma once
+/********************************************************/
+//ÓÃÓÚ¶¨ÒåÈ«¾ÖÓÃµ½µÄºê
 
 #define SIZEX 960
 #define SIZEY 720
-//ÓÃÓÚ¶¨ÒåÈ«¾ÖÓÃµ½µÄº¯Êı
-
-
-#include"midplay.h"
-#include<stdio.h>	
-#include<graphics.h>
-#include<conio.h>
-#include<queue>
-#include"char2tchar.h"
-#include <time.h>
-#include<graphics.h>
-#include<string.h>
-#include<stringapiset.h>
-#include"declarestruct.h"
-
-#include<windows.h>
-//#include"game_elements.h"
-//#include"transimg.h"
-#pragma comment(lib, "Winmm.lib")
-//#include"MyTimer.h"
 
 #define CMD_UP 0x00000001
 #define CMD_DOWN 0x00000002
@@ -71,6 +53,25 @@ iscrash(40, 50, boss.x + (xboss) * 40, boss.y + (yboss) * 50,ORB.x,ORB.y,RADIUS)
 			}
 
 #define PI 3.141592654
+
+#include"midplay.h"
+#include<stdio.h>	
+#include<graphics.h>
+#include<conio.h>
+#include<queue>
+#include"char2tchar.h"
+#include <time.h>
+#include<string.h>
+#include<stringapiset.h>
+#include"declarestruct.h"
+
+#include<windows.h>
+//#include"game_elements.h"
+//#include"transimg.h"
+#pragma comment(lib, "Winmm.lib")
+//#include"MyTimer.h"
+
+
 using namespace std;
 
 //ÓÎÏ·¿ªÍ·µÄÕ¹Ê¾
@@ -90,7 +91,7 @@ int limitmenujudge(int optnum, int c_opt, int optmove);//È«¾Ö»áÓÃµ½µÄÑ¡ÔñÀ¸Ô½½çÅ
 
 //MAINMENU:
 //Ö÷²Ëµ¥Ïà¹Ø
-int cmdmainmenu(int*);
+int cmdmainmenu();
 void drawmainmenu(int topt);
 void drawmainmenufalme();
 
@@ -116,14 +117,12 @@ int cmdselect_reimu();
 void drawselect_reimu(int topt);
 
 //ÓÎÏ·Ö÷ÌåÖĞµÄGLOBAL
-int gamemain(int* endsignal,int);
+int gamemain(int);
 void drawgameflame();
 void cmdreimu();
 void init_fastyuzha();
 
 //escmenu
-int cmdescmenu();
-void drawescmenu(int opt);
 void escmenuflame();
 
 void init_yuzha();
@@ -158,3 +157,13 @@ void harvestallreward();
 
 //chat
 void chat1();
+
+void drawitemswhenstatic();
+void drawitemswhenmove();			
+void printscore(int stage);
+
+void moveallbullet();
+void ishurtcard();
+void ishurtreimu();
+
+void respawn();

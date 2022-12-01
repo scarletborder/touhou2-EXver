@@ -1,11 +1,12 @@
 #include"menuh.h"
 /**************奖励模块*********************/
-//用于定义游戏正文中用到的元素
+//用于引用奖励模块所用到的元素
 #if 1
 
 //游戏中各种奖励结构
 extern struct rewards reward[32];
 
+//灵梦状态
 extern struct player_status reimu;
 
 //游戏上方的计分板
@@ -15,6 +16,8 @@ extern unsigned int iscontinuepoint;
 extern short int stage;
 
 #endif
+/*******************************************/
+
 
 /**********根据连打卡片数量来提供奖励分数***********/
 void rewardhurtcard(int iscontinuecard,int stage)

@@ -1,4 +1,10 @@
 #include"menuh.h"
+#include <iostream>
+/*******************************************/
+//功能：展示计分板或修改计分板
+//修改计分板用户名称模块有bug
+//请参考《接水果案例》修改
+/*******************************************/
 
 struct playerdata
 {
@@ -91,8 +97,9 @@ void seeresult()
 }
 #endif
 
+
 #if 1
-//游戏结束保存分数
+//游戏结束保存分数，修改计分板
 void saveresult(int cscore)
 {
 	//先获取历史数据
@@ -107,7 +114,7 @@ void saveresult(int cscore)
 	for (i = 0; i < 10; i++)
 	{
 		//printf("%d:\\ %s", i, playername[i]);
-		fgets(player[i].playername, 14, (FILE*)score_name);
+		fgets(player[i].playername, 30, (FILE*)score_name);
 	}
 	fclose(score_name);
 
@@ -140,7 +147,7 @@ void saveresult(int cscore)
 	char cscorestr[15] = { 0 };
 	sprintf(cscorestr, "%d", cscore);
 
-	outtextxy(50, 200, _T("恭喜通关开发预览版v0.00b,你的分数为"));
+	outtextxy(50, 200, _T("恭喜通关v0.00b,你的分数为,按回车键继续"));
 	outtextxy(50, 245, char2TCAHR(cscorestr));
 
 	//不符合录入要求
@@ -177,23 +184,29 @@ void saveresult(int cscore)
 	}
 	sprintf(player[numi + 1].playerscore, "%d\n", cscore);
 
-
-	outtextxy(50, 335, _T("记分板因未知原因停用,仅支持记录分数，按回车键继续"));//，请输入玩家的名字，少于14字
 	fflush(stdin);
-	Sleep(1000);
-	fflush(stdin);
-	Sleep(1000);
-	char newname[15] = { 0 };
-	scanf_s("%s", newname, 15);
+	Sleep(40);
+	scanf("%*[^\n]%*c");
+	outtextxy(50, 335, _T("请输入机签，按回车键继续"));//，请输入玩家的名字，少于14字
+	char newname[31] = { 0 };
+	cin >> newname;
 
-	//int namei = 0;
-	//for (namei = 0; newname[namei] != '\n'; namei++)
-	//{
+	int namei = 0;
+	for (namei = 0; namei < 32; namei++)
+	{
+		if (newname[namei] == '\n')
+		{
+			newname[namei] = ' ';
+		}
+	}
+	
+	for (namei = 0; newname[namei] != '\0'; namei++)
+	{
+		*(player[numi + 1].playername + namei) = *(newname + namei);
 
-	//}
-	//newname[namei] = '\0';
-
-	strcpy(player[numi + 1].playername, newname);
+	}
+	*(player[numi + 1].playername + namei) = '\n';
+	
 
 	int linenum = 0;
 	score_name = fopen("result\\player.txt", "w");
@@ -202,19 +215,23 @@ void saveresult(int cscore)
 
 
 	
-	while (linenum < 10)
-	{
-		for (int j = 0; newname[j] != '\0'; j++)
-		{
-			if (newname[j] == '\n')
-			{
-				newname[j] = ' ';
-			}
+	//while (linenum < 10)
+	//{
+	//	for (int j = 0; newname[j] != '\0'; j++)
+	//	{
+	//		if (newname[j] == '\n')
+	//		{
+	//			newname[j] = ' ';
+	//		}
 
-		}
+	//	}
 
-		linenum++;
-	}
+	//	linenum++;
+	//}
+
+
+
+
 	i = 0;
 	while (i < 10)
 	{

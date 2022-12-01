@@ -2,24 +2,29 @@
 #define SIZEX 960
 #define SIZEY 720
 
+/************************************************/
+//用途：用于boss关卡前的对话和（未来的）ending图片播放
+//输入：无
+//输出：无
 
-
-//开始聊天
+//对话框开始聊天
 #define startchat \
 cleardevice(); \
 textpositon = { 50, SIZEY - 240, SIZEX - 50, SIZEY }; \
 cleardevice()
 
-//下一条
+//下一条聊天内容
 #define nexttext \
 FlushBatchDraw(); \
-Sleep(4000);\
+Sleep(2000);\
 cleardevice()
 
 RECT textpositon;
 
+//添加一句话所用到的函数
 //drawtext(_T(""), &textpositon, DT_LEFT);
 
+//stage5对话
 void chat1()
 {
 	settextcolor(WHITE);

@@ -1,4 +1,9 @@
 #include"menuh.h"
+/******************************************************************************************/
+//功能1：用于每关游戏开始的初始化关卡，如放置敌人
+//功能2：用于游戏中每隔一段时间放置特殊弹幕
+/******************************************************************************************/
+
 extern struct enemycards card[207];
 extern struct bullets enemybullet[maxbullet];
 extern struct TOWER tower[32];
@@ -336,6 +341,8 @@ void stage6()
 
 
 }
+
+
 /**************初始化关卡main****************************/
 int initstage(int num)
 {
@@ -420,6 +427,7 @@ int initstage(int num)
 
 
 /********生成敌弹示例**********/
+//还是看之前关卡的特殊弹幕生成吧
 #if 0
 for (int bulletid = 0; bulletid < maxbullet; bulletid++)
 {

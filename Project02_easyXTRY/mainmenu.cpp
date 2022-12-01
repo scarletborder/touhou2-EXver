@@ -25,7 +25,7 @@ void drawmainmenufalme()
 	outtextxy(SIZEX - 320, SIZEY - 40, _T("星尘幻想研究所© 2022"));
 }
 
-int cmdmainmenu(int* signalp)
+int cmdmainmenu()
 {
 	endbgm;
 	setbkcolor(BLACK);

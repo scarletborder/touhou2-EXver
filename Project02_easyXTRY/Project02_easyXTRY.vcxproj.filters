@@ -42,16 +42,13 @@
     <ClCompile Include="gamecmd.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="escmenu.cpp">
+    <ClCompile Include="gamemenu.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="转载引用.cpp">
+    <ClCompile Include="put_transparent_img.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="initstage.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="gamestruct.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="reward.cpp">
@@ -61,6 +58,15 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="bosschat.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="gamedraw.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="gamemove.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="gameelements.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -74,14 +80,19 @@
     <ClInclude Include="declarestruct.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="resource1.h">
+    <ClInclude Include="MyTimer.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="MyTimer.h">
+    <ClInclude Include="resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="resource1.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="cpp.hint" />
+    <Image Include="C:\Users\HONOR\Desktop\阴阳.ico">
+      <Filter>资源文件</Filter>
+    </Image>
   </ItemGroup>
 </Project>

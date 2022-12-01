@@ -7,11 +7,15 @@ extern short int stage;
 extern struct game_score cscore;
 extern struct yinyang_orb ORB;
 
-//boss两招间隔
+
+//用途：boss两招间隔
+//输入：waittick->boss两招之间的间隔时间
 #define jtime(waittick) \
 if (currentticktime - skilltick >= (waittick))
 
+
 /*********************BOSS反击*******************************/
+//在这里写所有boss在受到攻击时的反击动作
 void bossattack(short int stagea)
 {
 	short int bulletid = 0;
@@ -48,7 +52,9 @@ void bossattack(short int stagea)
 
 }
 
-//阴阳玉是否打到boss
+
+//判断阴阳玉是否打到boss
+//c语言回车不影响语法，
 void ishurtboss()
 {
 	short int iscrashboss = 0;
@@ -62,14 +68,17 @@ void ishurtboss()
 		if (isorbcrashboss(0, 0) || isorbcrashboss(1, 0) || isorbcrashboss(2, 0) || isorbcrashboss(3, 0) || isorbcrashboss(4, 0) ||
 			isorbcrashboss(0, 1) || isorbcrashboss(1, 1) || isorbcrashboss(2, 1) || isorbcrashboss(3, 1) || isorbcrashboss(4, 1) ||
 			isorbcrashboss(0, 2) || isorbcrashboss(1, 2) || isorbcrashboss(2, 2) || isorbcrashboss(3, 2) || isorbcrashboss(4, 2) ||
-			isorbcrashboss(1, 3) || isorbcrashboss(2, 3) || isorbcrashboss(3, 3) ||
-			isorbcrashboss(2, 4)
+									isorbcrashboss(1, 3) || isorbcrashboss(2, 3) || isorbcrashboss(3, 3) ||
+															isorbcrashboss(2, 4)
 			)
+
 		{
 			iscrashboss = 1;
 		}
 		break;
 	}
+
+	/**************************end judge**************************/
 
 	//如果是crash的状态
 	if (iscrashboss == 1)
@@ -83,12 +92,12 @@ void ishurtboss()
 			boss.havebeencrashed = 1;
 			return;
 		}
-		else
+		else//阴阳玉持续贴在boss上
 		{
 			return;
 		}
 	}
-	else
+	else//阴阳玉从boss上离开，恢复等待碰撞状态
 	{
 		boss.havebeencrashed = 0;
 		return;
@@ -100,8 +109,9 @@ void ishurtboss()
 /****************************************************************/
 //功能：
 //输入当前关卡
-//实现用法：招式连续性由静态变量实现，每次在满足时间后会将当前的招式++，
-//如5面的1式就是10,11,12,13
+//实现用法：招式连续性由静态变量实现，每次在满足时间后会将当前的招式序号++，
+// 在本招式出完过后，如果设置为非连续出招，则变为0，等待随机数出下一招
+//如5面的1式就是10,11,12,13，接2式
 void bossskill(short int stage)
 {
 	//在每次重新赋值skillnum后获取一次当前时间
@@ -113,6 +123,8 @@ void bossskill(short int stage)
 	//根据关卡不同来判断可以进行哪些连招
 	switch (stage)
 	{
+		/*第五关*/
+#if 1
 	case 5:
 		//尚未连招，分配一个
 		if (skillnum == 0)
@@ -549,6 +561,12 @@ void bossskill(short int stage)
 		}
 		/*************************************************************************************************/
 			break;
+#endif
+
+		/*第十关*/
+#if 1
+#endif
 	}
+
 
 }

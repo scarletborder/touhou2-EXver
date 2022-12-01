@@ -135,8 +135,10 @@
     <ClCompile Include="bosschat.cpp" />
     <ClCompile Include="bossstagecpp.cpp" />
     <ClCompile Include="gamecmd.cpp" />
-    <ClCompile Include="escmenu.cpp" />
-    <ClCompile Include="gamestruct.cpp" />
+    <ClCompile Include="gamemenu.cpp" />
+    <ClCompile Include="gamedraw.cpp" />
+    <ClCompile Include="gameelements.cpp" />
+    <ClCompile Include="gamemove.cpp" />
     <ClCompile Include="global.cpp" />
     <ClCompile Include="initstage.cpp" />
     <ClCompile Include="main.cpp" />
@@ -145,7 +147,7 @@
     <ClCompile Include="reward.cpp" />
     <ClCompile Include="scoreboard.cpp" />
     <ClCompile Include="select_reimutype.cpp" />
-    <ClCompile Include="转载引用.cpp" />
+    <ClCompile Include="put_transparent_img.cpp" />
     <ClCompile Include="彩虹案例.cpp" />
     <ClCompile Include="星空案例.cpp" />
   </ItemGroup>
@@ -154,10 +156,11 @@
     <ClInclude Include="declarestruct.h" />
     <ClInclude Include="menuh.h" />
     <ClInclude Include="MyTimer.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="resource1.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="cpp.hint" />
+    <Image Include="C:\Users\HONOR\Desktop\阴阳.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
